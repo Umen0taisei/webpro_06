@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ガチャを引くだけ</title>
+</head>
+<body>
+    <h4>独断と偏見で選んだ四字熟語ピックアップガチャ</h4>
+    <p>収録カード</p>
+    <ul>
+        <li>[USSR]完全無欠</li>
+        <li>[SSR]不倶戴天</li>
+        <li>[SSR]画竜点睛</li>
+        <li>[SR]大胆不敵</li>
+        <li>[SR]前途洋々</li>
+        <li>[R]焼肉定食</li>
+        <li>[R]起承転結</li>
+    </ul>
+    <h3>取得したカードは</h3>
+    <ul>
+        <% resu.forEach(function(gatya) { %>
+            <li><%= gatya %></li>
+        <% }); %>
+    </ul>
+</body>
+</html>

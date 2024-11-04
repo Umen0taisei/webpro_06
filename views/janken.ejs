@@ -10,11 +10,14 @@
     <p>判定：<%= judgement %></p>
     <p>現在<%= total %>試合中<%= win %>勝しています．</p>
     <hr>
-    <form action="/janken">
+    <form action="/janken"> 
+        <!--ボタンが押された時に実行するサーバのURL-->
         <input type="text" name="hand" required>
+        <!--input type=textは入力欄を表す,nameで受け取る　reは書きなさい-->
         <label for="hand">次は何を出す？</label>
         <input type="hidden" name="win" value="<%= win %>">
         <input type="hidden" name="total" value="<%= total %>">
+        <!--フォームの情報を表示しないけど保持してね-->
         <input type="submit" values="じゃんけん　ポン">
     </form>   
 </body>

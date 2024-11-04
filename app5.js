@@ -28,20 +28,36 @@ app.get("/luck", (req, res) => {
 });
 
 app.get("/janken", (req, res) => {
+  //req.qyery.nameで入力された内容をとってくることができる
   let hand = req.query.hand;
+  //文字列をNumber関数で数字に変換
   let win = Number( req.query.win );
   let total = Number( req.query.total );
+  total += 1;
+  //デバッグ用
   console.log( {hand, win, total});
+  //cpu側操作
   const num = Math.floor( Math.random() * 3 + 1 );
   let cpu = '';
   if( num==1 ) cpu = 'グー';
   else if( num==2 ) cpu = 'チョキ';
-  else cpu = 'パー';
+  else cpu = 'パー'; //3
   // ここに勝敗の判定を入れる
-  // 今はダミーで人間の勝ちにしておく
-  let judgement = '勝ち';
-  win += 1;
-  total += 1;
+  let judgement = '';
+  let plnum = 0;
+  if (hand == 'グー')plnum = 1;
+  else if( hand =='チョキ' ) plnum = 2;
+  else plnum = 3; //パー
+
+  if(num == plnum) judgement = 'あいこ';
+  else if(num == 3 & plnum == 1)judgement = '負け';
+  else if(num == 1 & plnum == 3)judgement = '勝ち';
+  else if(num < plnum)judgement = '負け';
+  else if(num > plnum)judgement = '勝ち';
+  else 0;
+
+  if(judgement == '勝ち')win += 1;
+  //デバッグ用２
   const display = {
     your: hand,
     cpu: cpu,
@@ -49,6 +65,7 @@ app.get("/janken", (req, res) => {
     win: win,
     total: total
   }
+  //janken.ejsを見にいく
   res.render( 'janken', display );
 });
 
