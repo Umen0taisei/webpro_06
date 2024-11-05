@@ -14,4 +14,3 @@ views/janken.ejs | じゃんけんテンプレート
 1. ```node app5.js```でapp5.jsを起動する
 1. Webブラウザから```locahost:8080/public/janken.html```にアクセスする
 1. ```グー```,```チョキ```,```パー```のいずれかの手を入力
-
