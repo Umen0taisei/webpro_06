@@ -66,6 +66,7 @@ app.get("/janken", (req, res) => {
     total: total
   }
   //janken.ejsを見にいく
+  //テンプレファイルのjanken使用
   res.render( 'janken', display );
 });
 
