@@ -1,3 +1,4 @@
+const e = require("express");
 const express = require("express");
 const app = express();
 
@@ -68,6 +69,89 @@ app.get("/janken", (req, res) => {
   //janken.ejsを見にいく
   //テンプレファイルのjanken使用
   res.render( 'janken', display );
+});
+
+
+app.get("/bj", (req, res) => {
+  //req.qyery.radioでどの操作するか
+  const value =req.query.radio;
+  //トランプ配列定義
+  const tranp = [];
+  for (let t = 1; t < 14; t++){
+    if(t==13){
+      for(let j = 0; j < 2; j++){
+        tranp.push(t);
+    for(let k = 0; k < 4; k++){
+      tranp.push(t);
+        }
+      }
+    }
+  }
+  //文字列をNumber関数で数字に変換
+  let win = Number( req.query.win );
+  let total = Number( req.query.total );
+  total += 1;
+  //デバッグ用
+  console.log( {value, win, total});
+
+  function draw(array){
+    const num = Math.floor( Math.random() * array.length);
+    const drawc = array[num];
+    array.splice(num,1);
+    if(drawc <= 9) return drawc;
+    else return 10;
+  }
+  
+  //gm側操作
+  // let gm = 0;
+  // while(gm <= 17){
+  //   const num = Math.floor( Math.random() * tranp.length);
+  //   const [gmdraw] = tranp.splice(num,1);
+  //   gm = gm + gmdraw;
+  // }
+  let gmdraw = 0;
+  let gm = 0;
+  while( gm <= 17 ){
+    gmdraw = draw(tranp);
+    gm = gm + gmdraw;
+  }
+  console.log( {gmdraw,gm});
+
+  //PL側操作
+  let pldraw = 0;
+  let pl = 0;
+  for(let i = 0;i < 2;i++){
+    pldraw = draw(tranp);
+    pl = pl + pldraw;
+  }
+  console.log( {pldraw,pl});
+
+  if (value == 1){
+    pldraw = draw(tranp);
+    pl = pl + pldraw;
+  }
+  else 0;
+
+  // 勝敗判定
+  if(pl & gm ==21) judgement = 'hikiwke';
+  else if(pl >= 21) judgement = '負け';
+  else if(gm >= 21) judgement = '負け';
+  else if(pl > gm) judgement = '勝ち';
+  else if(pl = gm) judgement = 'hikiwke';
+  else judgement = '負け';
+
+  if(judgement == '勝ち')win += 1;
+  //janken.ejsを見にいく
+  //テンプレファイルのjanken使用
+  const display = {
+    your: pl,
+    cpu: gm,
+    judgement: judgement,
+    win: win,
+    total: total
+  }
+  res.render( 'bj', display );
+
 });
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
