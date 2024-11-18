@@ -207,33 +207,57 @@ app.get("/gatya", (req, res) => {
   const value =req.query.radio;
   const resu = [];
   let total = Number( req.query.total );
+  let high = Number( req.query.high);
+  let ur = Number( req.query.ur);
 
-  function gatya(total){
-    const num = Math.floor( Math.random() * 101 + 1 );
+  function gatya(count){
+    count = 0;
+    let num = 0;
     let gatya = '';
-    if(num == 101)gatya = '[USSR]完全無欠'; /*0.01% */
-    else if(num > 95)gatya = '[SSR]不倶戴天'/*0.05%*/
-    else if(num <= 95,num > 90)gatya = '[SSR]画竜点睛'/*0.05%*/
-    else if(num <= 90,num > 75)gatya = '[SR]大胆不敵'/*0.15%*/
+    if(count == 1)
+      num = Math.floor( Math.random() * 50 + 51 );
+    else
+      num = Math.floor( Math.random() * 101 + 1 );
+
+    if(num == 101){
+      gatya = '[USSR]完全無欠'; /*0.01% */
+      high += 1;
+      ur += 1;
+    }else if(num > 95){
+      gatya = '[SSR]不倶戴天'/*0.05%*/
+      high += 1;
+    }else if(num <= 95,num > 90){
+      gatya = '[SSR]画竜点睛'/*0.05%*/
+      high += 1;
+    }else if(num <= 90,num > 75)gatya = '[SR]大胆不敵'/*0.15%*/
     else if(num <= 75,num > 50)gatya = '[SR]前途洋々'/*0.15%*/
     else if(num <= 50,num > 25)gatya = '[R]起承転結'/*0.15%*/
     else gatya = '[R]焼肉定食'
-    total += 1;
     return gatya;
   }
 
+  
+
   if(value == 1){
-    resu.push(gatya(total))
+    resu.push(gatya(0))
+    total += 1;
   }else{
     for(let i =0;i<10;i++){
-      resu.push(gatya(total))
+      resu.push(gatya(0))
+      total += 1;
     }
+    resu.push(gatya(1));
+    total += 1;
   }
 
   const display = {
     draw: resu,
-    total: total
+    total: total,
+    sr: high,
+    ur: ur
   }
+
+  console.log({resu,total})
   // let gatya = '';
   // if(num == 101)gatya = '[USSR]完全無欠'; /*0.01% */
   // else if(num > 95)gatya = '[SSR]不倶戴天'/*0.05%*/
