@@ -128,12 +128,12 @@ app.get("/gatya", (req, res) => {
     let num = 0;
     let gatya = '';
     if(count == 1)
-      num = Math.floor( Math.random() * 50 + 51 );
+      num = Math.floor( Math.random() * 40 + 61 );
     else
       num = Math.floor( Math.random() * 101 + 1 );
 
     if(num == 101){
-      gatya = '[USSR]完全無欠'; /*0.01% */
+      gatya = '[USSR]完全無欠'; /*1% */
       high += 1;
       ur += 1;
     }else if(num > 95){
@@ -143,8 +143,8 @@ app.get("/gatya", (req, res) => {
       gatya = '[SSR]画竜点睛'/*0.05%*/
       high += 1;
     }else if(num <= 90,num > 75)gatya = '[SR]大胆不敵'/*0.15%*/
-    else if(num <= 75,num > 50)gatya = '[SR]前途洋々'/*0.15%*/
-    else if(num <= 50,num > 25)gatya = '[R]起承転結'/*0.15%*/
+    else if(num <= 75,num > 60)gatya = '[SR]前途洋々'/*0.15%*/
+    else if(num <= 60,num > 30)gatya = '[R]起承転結'/*0.15%*/
     else gatya = '[R]焼肉定食'
     return gatya;
   }
