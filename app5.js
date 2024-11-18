@@ -77,12 +77,8 @@ app.get("/bj", (req, res) => {
   const value =req.query.radio;
   //トランプ配列定義
   const tranp = [];
-  for (let t = 1; t <= 14; t++){
-    if(t==14){
-      for(let j = 0; j < 2; j++){
-        tranp.push(t);
-      }
-    }else if(t >= 10){
+  for (let t = 1; t <= 13; t++){
+    if(t >= 10){
       for(let i = 0;i < 4;i++){
         tranp.push(10);
       }
@@ -150,8 +146,10 @@ app.get("/bj", (req, res) => {
   if(judgement == '勝利！')win += 1;
 
   const display = {
-    your: plhand,
-    cpu: gmhand,
+    yourhand: plhand,
+    your: pl,
+    cpuhand: gmhand,
+    cpu: gm,
     judgement: judgement,
     win: win,
     total: total
@@ -174,13 +172,21 @@ app.get("/jihanki", (req, res) => {
     const num = Math.floor( Math.random() * 10);
     luck.push(num);
   }
-  if (luck[0] === luck[1] && luck[1] === luck[2]) {
+  if (luck[0] == luck[1] && luck[1] == luck[2]) {
     hon = Math.floor(Math.random() * 50000 + 50001); 
+    //50001~100000
     com = '超大当たり！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！'
-  }else{
+  }else if(luck[0] == luck[1]){
+    hon = Math.floor(Math.random() * 500 + 501);
+    //501~1000
+    com = '大当たり！！！！！！！！！！'
+  }else if(luck[1] == luck[2]){
     hon = Math.floor(Math.random() * 500 + 501);
     com = '大当たり！！！！！！！！！！'
-  }
+  }else if(luck[0] == luck[2]){
+    hon = Math.floor(Math.random() * 500 + 501);
+    com = '大当たり！！！！！！！！！！'
+  }else com = 'ありがとうございました！'
   N *= hon;
   total += N;
 

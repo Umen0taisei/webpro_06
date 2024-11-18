@@ -6,7 +6,7 @@
 </head>
 <body>
     <p>あなたの手札は<%= yourhand %>（合計 <%= your %>)</p>
-    <p>コンピュータは<%= cpu %>です．</p>
+    <p>コンピュータは<%= cpuhand %>（合計 <%= cpu %>)です．</p>
     <p>判定：<%= judgement %></p>
     <p>現在<%= total %>試合中<%= win %>勝しています．</p>
     <hr>
@@ -23,5 +23,6 @@
         <!--フォームの情報を表示しないけど保持してね-->
         <input type="submit" values="Ready">
     </form>   
+    <p></p><a href="/public/index.html">目次に戻る</a></p>
 </body>
 </html>

@@ -2,9 +2,17 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>じゃんけん</title>
+    <title>ブラックジャック</title>
 </head>
 <body>
+    <h2>ブラックジャックです</h2>
+    <ul>
+        <li>カードを引いて，手札の数字の合計が21に近い方が勝利</li>
+        <li>合計が22以上になってしまうと「バースト」となり，敗北する</li>
+        <li>山札は各ソート1~Kの52枚</li>
+        <li>今回エース(A)は1とし，J,Q,Kは10とみなす</li>
+    </ul>
+    <p><%= your %></p>
     <form action="/bj" method="get"> 
         <input type="radio" name="radio" id="radio1" value="1">
         <label for="radio1">ドロー</label>
@@ -16,5 +24,7 @@
         <input type="hidden" name="total" value="<%= total %>">
         <!--フォームの情報を表示しないけど保持してね-->
         <input type="submit" values="Ready">
+    </form>
+    <p></p><a href="/public/index.html">目次に戻る</a></p>
 </body>
 </html>
