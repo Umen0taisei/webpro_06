@@ -5,17 +5,16 @@
     <title>自販機</title>
 </head>
 <body>
-    <p>あなたの手は<%= your %>です．</p>
-    <p>コンピュータは<%= cpu %>です．</p>
-    <p>判定：<%= judgement %></p>
-    <p>現在<%= total %>試合中<%= win %>勝しています．</p>
+    <p>ラッキールーレットの結果は<%= luck %>です．</p>
+    <p><%= com %></p>
+    <p><%= your %>が<%= hon %>本出てきました</p>
+    <p>現在<%= total %>本入手しました</p>
     <hr>
-    <form action="/janken"> 
+    <form action="/jihanki"> 
         <!--ボタンが押された時に実行するサーバのURL-->
         <input type="text" name="hand" required>
         <!--input type=textは入力欄を表す,nameで受け取る　reは書きなさい-->
-        <label for="hand">次は何を出す？</label>
-        <input type="hidden" name="win" value="<%= win %>">
+        <label for="hand">次は何を買いますか？</label>
         <input type="hidden" name="total" value="<%= total %>">
         <!--フォームの情報を表示しないけど保持してね-->
         <input type="submit" values="じゃんけん　ポン">

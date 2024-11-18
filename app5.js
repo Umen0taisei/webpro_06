@@ -77,29 +77,33 @@ app.get("/bj", (req, res) => {
   const value =req.query.radio;
   //トランプ配列定義
   const tranp = [];
-  for (let t = 1; t < 14; t++){
-    if(t==13){
+  for (let t = 1; t <= 14; t++){
+    if(t==14){
       for(let j = 0; j < 2; j++){
         tranp.push(t);
-    for(let k = 0; k < 4; k++){
-      tranp.push(t);
-        }
+      }
+    }else if(t >= 10){
+      for(let i = 0;i < 4;i++){
+        tranp.push(10);
+      }
+    }else{
+      for(let k = 0; k < 4; k++){
+        tranp.push(t);
       }
     }
   }
   //文字列をNumber関数で数字に変換
   let win = Number( req.query.win );
   let total = Number( req.query.total );
+  let judgement = '';
   total += 1;
   //デバッグ用
   console.log( {value, win, total});
 
   function draw(array){
     const num = Math.floor( Math.random() * array.length);
-    const drawc = array[num];
-    array.splice(num,1);
-    if(drawc <= 9) return drawc;
-    else return 10;
+    const drawc = array.splice(num,1)[0];
+    return drawc;
   }
   
   //gm側操作
@@ -109,49 +113,88 @@ app.get("/bj", (req, res) => {
   //   const [gmdraw] = tranp.splice(num,1);
   //   gm = gm + gmdraw;
   // }
+  let gmhand = [];
   let gmdraw = 0;
   let gm = 0;
   while( gm <= 17 ){
     gmdraw = draw(tranp);
-    gm = gm + gmdraw;
+    gmhand.push(gmdraw);
+    gm += gmdraw;
   }
   console.log( {gmdraw,gm});
 
+
   //PL側操作
+  let plhand =[];
   let pldraw = 0;
   let pl = 0;
   for(let i = 0;i < 2;i++){
     pldraw = draw(tranp);
-    pl = pl + pldraw;
+    plhand.push(pldraw);
+    pl += pldraw;
   }
   console.log( {pldraw,pl});
 
   if (value == 1){
     pldraw = draw(tranp);
-    pl = pl + pldraw;
+    plhand.push(pldraw);
+    pl += pldraw;
   }
-  else 0;
+  else 
+    if(pl & gm ==21) judgement = '引き分け';
+    else if(pl >= 21) judgement = 'バースト！あなたの負け';
+    else if(gm >= 21) judgement = '勝利！';
+    else if(pl > gm) judgement = '勝利！';
+    else if(pl = gm) judgement = '引き分け';
+    else judgement = '負け';
+  if(judgement == '勝利！')win += 1;
 
-  // 勝敗判定
-  if(pl & gm ==21) judgement = 'hikiwke';
-  else if(pl >= 21) judgement = '負け';
-  else if(gm >= 21) judgement = '負け';
-  else if(pl > gm) judgement = '勝ち';
-  else if(pl = gm) judgement = 'hikiwke';
-  else judgement = '負け';
-
-  if(judgement == '勝ち')win += 1;
-  //janken.ejsを見にいく
-  //テンプレファイルのjanken使用
   const display = {
-    your: pl,
-    cpu: gm,
+    your: plhand,
+    cpu: gmhand,
     judgement: judgement,
     win: win,
     total: total
   }
-  res.render( 'bj', display );
+  res.render('bj', display );
 
 });
+
+app.get("/jihanki", (req, res) => {
+  //req.qyery.nameで入力された内容をとってくることができる
+  let drink = req.query.drink;
+  let N = 1;
+  //文字列をNumber関数で数字に変換
+  let total = Number( req.query.total );
+
+  let luck = [];
+  let hon = 1;
+  let com = '';
+  for(let i = 0;i < 3;i++){
+    const num = Math.floor( Math.random() * 10);
+    luck.push(num);
+  }
+  if (luck[0] === luck[1] && luck[1] === luck[2]) {
+    hon = Math.floor(Math.random() * 50000 + 50100); 
+    com = '超大当たり！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！'
+  }else{
+    hon = Math.floor(Math.random() * 500 + 501);
+    com = '大当たり！！！！！！！！！！'
+  }
+  N *= hon;
+  total += N;
+
+  console.log({drink,N,luck,com,total})
+  const display = {
+    your: drink,
+    hon: N,
+    luck: luck,
+    com: com,
+    total: total
+  }
+
+  res.render( 'jihanki', display );
+});
+
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
