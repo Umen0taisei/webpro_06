@@ -8,7 +8,10 @@ cloneした日:2024/10/29(火)
 -|-
 app5.js | プログラム本体
 public/janken.html | じゃんけんの開始画面
+public/jihanki.html | 自販機の開始画面
 views/janken.ejs | じゃんけんテンプレート
+views/jihanki.ejs | 自販機テンプレート
+
 
 
 ## プログラムの使用方法

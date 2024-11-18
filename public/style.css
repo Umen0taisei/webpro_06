@@ -1,0 +1,97 @@
+#pt{
+    text-align: center;
+    color: #c178c3;
+    /*四角で直感的に変えることもできる。賢い。*/
+    padding: 3%;
+    background-color: #dbf7ae;
+    font-style: italic;
+    border-radius: 15px;
+}
+h2{
+    padding-left: 3%;
+    font-style: italic;
+    color: #856186;
+    text-decoration: underline;
+}
+p,h3{
+    color: #1f1e33;
+}
+
+h4{
+    color: #6b6a6b;
+}
+h5{
+    color: #aeaeae;
+}
+h6{
+    color: #d7d7d7;
+}
+body{
+    background-color: #fafff1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+ul,ol{
+    background-color: #caf0d0;
+    margin: 3%;
+    padding: 5%;
+    padding-top: 2%;
+    text-decoration: underline;
+    border-radius: 30px;
+    border:solid 1px #114d1a;
+}
+li{
+    font-size: 30px;
+    margin-left: 6%;
+    padding: 6px;
+    line-height: 50px;
+}
+a{
+    color: hwb(303 20% 14%);
+    font-size: 25px;
+}
+#gakumasu{
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    color: #6791d9;
+}
+#hobby1{
+    text-decoration: underline;
+}
+#hobby2{
+    text-decoration: underline;
+}
+table{
+    background-color: #caf0d0;
+    border: solid 2px;
+    border-collapse:collapse;
+    text-align: center;
+    width: 500px;
+}
+table th,table td{
+    border: dashed 1px;
+}
+table td{
+    background: #eaffed;
+}
+#bth,#btt{
+    font-size: 15px;
+    text-align: right;
+}
+#btt{
+    padding-top: 5px;
+}
+.red{
+    color: #e83131;
+}
+.blue{
+    color: #24a6f7;
+}
+.black{
+    color: #4d514e;
+}
+.red,.blue,.black{
+    font-size: 20px;
+    font-style: italic;
+}
+/*classは共通要素，複数使うときなどに
+    idはユニークな要素,一個しかないようなものに*/

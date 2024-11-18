@@ -175,7 +175,7 @@ app.get("/jihanki", (req, res) => {
     luck.push(num);
   }
   if (luck[0] === luck[1] && luck[1] === luck[2]) {
-    hon = Math.floor(Math.random() * 50000 + 50100); 
+    hon = Math.floor(Math.random() * 50000 + 50001); 
     com = '超大当たり！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！'
   }else{
     hon = Math.floor(Math.random() * 500 + 501);
