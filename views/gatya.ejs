@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ガチャを引くだけ</title>
+</head>
+<body>
+    <h4>独断と偏見で選んだ四字熟語ピックアップガチャ</h4>
+    <p>収録カード</p>
+    <ul>
+        <li>[USSR]完全無欠</li>
+        <li>[SSR]不倶戴天</li>
+        <li>[SSR]画竜点睛</li>
+        <li>[SR]大胆不敵</li>
+        <li>[SR]前途洋々</li>
+        <li>[R]焼肉定食</li>
+        <li>[R]起承転結</li>
+    </ul>
+    <h3>取得したカードは</h3>
+    <ul>
+        <%= draw %>
+    </ul>
+    <form action="/gatya" method="get"> 
+        <!--ボタンが押された時に実行するサーバのURL-->
+        <input type="radio" name="radio" id="radio1" value="1">
+        <label for="radio1">1連回す</label>
+        <br>
+        <input type="radio" name="radio" id="radio2" value="2">
+        <label for="radio2">10+連回す</label>
+        <br>
+        <input type="hidden" name="total" value="<%= total %>">
+        <!--フォームの情報を表示しないけど保持してね-->
+        <input type="submit" values="Ready">
+    </form>
+    <p></p><a href="/public/index.html">目次に戻る</a></p>
+</body>
+</html>

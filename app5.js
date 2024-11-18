@@ -202,5 +202,50 @@ app.get("/jihanki", (req, res) => {
   res.render( 'jihanki', display );
 });
 
+app.get("/gatya", (req, res) => {
+  //１０連用にfor文回す
+  const value =req.query.radio;
+  const resu = [];
+  let total = Number( req.query.total );
+
+  function gatya(total){
+    const num = Math.floor( Math.random() * 101 + 1 );
+    let gatya = '';
+    if(num == 101)gatya = '[USSR]完全無欠'; /*0.01% */
+    else if(num > 95)gatya = '[SSR]不倶戴天'/*0.05%*/
+    else if(num <= 95,num > 90)gatya = '[SSR]画竜点睛'/*0.05%*/
+    else if(num <= 90,num > 75)gatya = '[SR]大胆不敵'/*0.15%*/
+    else if(num <= 75,num > 50)gatya = '[SR]前途洋々'/*0.15%*/
+    else if(num <= 50,num > 25)gatya = '[R]起承転結'/*0.15%*/
+    else gatya = '[R]焼肉定食'
+    total += 1;
+    return gatya;
+  }
+
+  if(value == 1){
+    resu.push(gatya(total))
+  }else{
+    for(let i =0;i<10;i++){
+      resu.push(gatya(total))
+    }
+  }
+
+  const display = {
+    draw: resu,
+    total: total
+  }
+  // let gatya = '';
+  // if(num == 101)gatya = '[USSR]完全無欠'; /*0.01% */
+  // else if(num > 95)gatya = '[SSR]不倶戴天'/*0.05%*/
+  // else if(num <= 95,num > 90)gatya = '[SSR]画竜点睛'/*0.05%*/
+  // else if(num <= 90,num > 75)gatya = '[SR]大胆不敵'/*0.15%*/
+  // else if(num <= 75,num > 50)gatya = '[SR]前途洋々'/*0.15%*/
+  // else if(num <= 50,num > 25)gatya = '[R]起承転結'/*0.15%*/
+  // else gatya = '[R]焼肉定食'
+  // resu.push(gatya);
+  // }
+  res.render( 'gatya', display);
+});
+
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));

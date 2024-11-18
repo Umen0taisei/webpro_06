@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ガチャ</title>
+</head>
+<body>
+    <h2>ガチャです</h2>
+    <form action="/gatya" method="get"> 
+        <input type="radio" name="radio" id="radio1" value="1">
+        <label for="radio1">1連回す</label>
+        <br>
+        <input type="radio" name="radio" id="radio2" value="2">
+        <label for="radio2">10+1連回す</label>
+        <br>
+        <input type="hidden" name="total" value="<%= total %>">
+        <!--フォームの情報を表示しないけど保持してね-->
+        <input type="submit" values="Ready">
+    </form>
+    <p></p><a href="/public/index.html">目次に戻る</a></p>
+</body>
+</html>
