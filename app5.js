@@ -72,6 +72,16 @@ app.get("/janken", (req, res) => {
   res.render( 'janken', display );
 });
 
+app.get("/luck", (req, res) => {
+  const num = Math.floor( Math.random() * 6 + 1 );
+  let luck = '';
+  if( num==1 ) luck = '大吉';
+  else if( num==2 ) luck = '中吉';
+  else luck = '吉';
+  console.log( 'あなたの運勢は' + luck + 'です' );
+  res.render( 'luck', {number:num, luck:luck} );
+});
+
 app.get("/jihanki", (req, res) => {
   //req.qyery.nameで入力された内容をとってくることができる
   let drink = req.query.drink;
@@ -125,7 +135,6 @@ app.get("/gatya", (req, res) => {
   let ur = Number( req.query.ur);
 
   function gatya(count){
-    count = 0;
     let num = 0;
     let gatya = '';
     if(count == 1)
