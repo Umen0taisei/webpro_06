@@ -42,6 +42,14 @@ views/gatya.ejs | ガチャテンプレート
 #### じゃんけん
 このプログラムでは，CPUとじゃんけんをすることができる．入力欄に自身の手を入力するとCPUと比較し，勝敗を決める．
 また，累計勝負数，累計勝利数を表示することもできる．
+以上の仕様を以下のフローチャートに示す．
+```marmaid
+flowchart TD;
+st["開始"]
+en["終了"]
+my["自身の手を入力"]
+re1["勝利"]
+```
 
 使用する場合は```index.html```から「じゃんけん」を選択するか，```localhost:8080/public/janken.html)```に直接アクセスする．
 
@@ -87,12 +95,12 @@ now -->end1
 - 15%でSR(2種)
 - 30%でR(2種)
 
-また，10+1回引くと，1回ではSR以上が必ず出現する．これは通常の提供確率からRを排除した確率で提供されるため，提供確率は以下のとおりである．
+また，10+1回引くと，追加の1回ではSR以上が必ず出現する．これは通常の提供確率からRを排除した確率で提供されるため，提供確率は以下のとおりである．
 - 約4.76%でUSSR(1種)
 - 約11.91%でSSR(2種)
 - 約35.72%でSR(2種)
 
-加えて，現在引いた数，SR以上の獲得枚数，USSRの獲得枚数をカウントすることもできる．
+加えて，現在引いた数，SSR以上の獲得枚数，USSRの獲得枚数をカウントすることもできる．
 以上の仕様を以下のフローチャートに示している．
 
 ```mermaid
@@ -108,12 +116,12 @@ ssr["SSR 2種"]
 sr["SR ２種"]
 r["R 2種"]
 11ussr["USSR 1種"]
-11ssr["USSR 1種"]
-11sr["USSR 1種"]
+11ssr["SSR 2種"]
+11sr["SR 2種"]
 count_ussr["USSRカウント"]
 count_ussr1["USSRカウント"]
-count_sr["SR以上カウント"]
-count_sr1["SR以上カウント"]
+count_sr["SSR以上カウント"]
+count_sr1["SSR以上カウント"]
 now["現在回した回数"]
 
 start --> if
@@ -129,16 +137,16 @@ if -->11
 ussr -->count_ussr
 ussr -->count_sr
 ssr -->count_sr
-sr -->count_sr
 11ussr -->count_ussr1
 11ussr -->count_sr1
 11ssr -->count_sr1
-11sr -->count_sr1
 count_ussr -->now
 count_sr -->now
 count_ussr1 -->now
 count_sr1 -->now
 r --->now
+sr --->now
+11sr --->now
 now -->end1
 
 ```
