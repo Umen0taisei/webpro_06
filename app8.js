@@ -82,6 +82,10 @@ app.post("/add", (req, res) => {
   res.json( {answer: num1+num2} );
 });
 
+
+
+
+
 // これより下はBBS関係
 app.post("/check", (req, res) => {
   // 本来はここでDBMSに問い合わせる
@@ -128,6 +132,53 @@ app.put("/bbs/:id", (req,res) => {
 app.delete("/bbs/:id", (req,res) => {
     console.log( "DELETE /BBS/" + req.params.id );
     res.json( {test: "DELETE /BBS/" + req.params.id });
+});
+
+//これより下は期末レポート関係
+
+app.post('/buy', (req,res) => {
+  const want = req.body.want;
+  let nun = 1;
+  let luck =[];
+
+  for(let i = 0;i < 3;i++){
+    const num = Math.floor( Math.random() * 10);
+    luck.push(num);
+  }
+
+  if (luck[0] == luck[1] && luck[1] == luck[2]) {
+    nun = Math.floor(Math.random() * 50000 + 50001); 
+    //50001~100000
+  }else if(luck[0] == luck[1]){
+    nun = Math.floor(Math.random() * 500 + 501);
+    //501~1000
+  }else if(luck[1] == luck[2]){
+    nun = Math.floor(Math.random() * 500 + 501);
+  }else if(luck[0] == luck[2]){
+    nun = Math.floor(Math.random() * 500 + 501);
+  }
+  console.log([want,luck,nun]);
+  res.json({want,luck,nun});
+});
+
+app.post('/nedan', (req,res) => {
+  let nun = req.body.totalcon; //総合計数
+  let nedan = req.body.nedancon;
+  let nedancon = 0;
+  console.log(nun,nedan,nedancon);
+  for(let i = 0; i < nun; i++){
+    const number = Math.floor(Math.random()*10);
+    if(number == 0){
+      nedancon += 500; 
+    }else if(number < 3){
+      nedancon += 300;
+    }else{
+      nedancon += 100;
+    }
+  }
+  nedan = nedancon;
+  console.log([nun,nedan,nedancon]);
+  res.json({nedan});
 });
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));

@@ -1,0 +1,49 @@
+#big{
+    color: rgb(255, 71, 71);
+}
+
+.cover {
+    border-bottom: 1px solid hsl(0, 0%, 75%);
+    margin: 3px;
+}
+
+.name {
+    font-weight: bold;
+    width: 8em;
+}
+
+.mes {
+    margin-left: 30px;
+}
+
+#buy {
+    /* margin-left: 45px; */
+    color: rgb(255, 45, 115);
+    background-color: rgb(245, 245, 245);
+    border-radius: 25px;
+    border-width: 1px;
+
+}
+
+#want {
+    /* color: aqua; */
+    margin-block-start: 50px;
+    /* margin-left: 50px; */
+
+}
+
+#ji {
+    /* border: 2px solid aqua; */
+    /* border-radius: 15px; */
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    background-color: aqua;
+    border-collapse:collapse;
+    width: 10cm;
+
+}
+
+/* クラスに対して指定するときは「.class」，idに対して指定するときは「#id」 */
+/*classは共通要素，複数使うときなどに
+    idはユニークな要素,一個しかないようなものに*/
