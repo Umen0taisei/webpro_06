@@ -1,8 +1,9 @@
 "use strict";
 
 //期末レポ関係
-let totalcon = 0;
-let nedancon = 0;
+let total_count = 0;
+let nedan_count = 0;
+let number_kanri = 0;
 const ji = document.querySelector('#ji');
 const result = document.querySelector('#result');
 const total = document.querySelector('#total');
@@ -10,7 +11,6 @@ const nedan = document.querySelector('#nedan_total');
 
 document.querySelector('#buy').addEventListener('click', () => {
     const want = document.querySelector('#want').value;
-    // const message = document.querySelector('#message').value;
 
     const params = {  // URL Encode
         method: "POST",
@@ -30,9 +30,13 @@ document.querySelector('#buy').addEventListener('click', () => {
     })
     .then( (response) => {
         console.log( response );
-        totalcon += response.nun
-        result.innerHTML = `<p>ルーレットの結果は${response.luck}，${response.want}が${response.nun}本</p>`
-        total.innerHTML = `<p>総合計本数：${totalcon}本`
+        total_count += response.nun;
+        if(response.want == ""){
+            response.want = "無";
+        }
+        result.innerHTML = `<p>ルーレットの結果は${response.luck}，${response.want}が${response.nun}本</p>`;
+        total.innerHTML = `<p>総合計本数：${total_count}本`;
+        number_kanri += response.kanri;
 
         document.querySelector('#want').value = "";
     });
@@ -41,7 +45,7 @@ document.querySelector('#buy').addEventListener('click', () => {
 document.querySelector('#nedan').addEventListener('click', () => {
     const params = {  // URL Encode
         method: "POST",
-        body:  'totalcon='+totalcon+'&nedancon='+nedancon,
+        body:  'total_count='+total_count+'&nedan_count='+nedan_count,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -56,7 +60,32 @@ document.querySelector('#nedan').addEventListener('click', () => {
     })
     .then( (response) => {
         console.log( response );
-        nedancon += response.nedan;
-        nedan.innerHTML = `<p>総額：${nedancon}円`
+        nedan_count += response.nedan_total;
+        nedan.innerHTML = ` 総額：${nedan_count}円 `
+    });
+});
+
+document.querySelector('#reset').addEventListener('click', () => {
+    const params = {  // URL Encode
+        method: "POST",
+        body:  '',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    const url = "/reset";
+    fetch( url, params )
+    .then( (response) => {
+        if( !response.ok ) {
+            throw new Error('Error');
+        }
+        return response.json();
+    })
+    .then( (response) => {
+        console.log( response );
+        document.querySelector('#want').value = "";
+        document.querySelector('#result').value = "";
+        document.querySelector('#total').value = "";
+        document.querySelector('#nedan').value = "";
     });
 });

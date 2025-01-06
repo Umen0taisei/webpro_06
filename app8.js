@@ -136,6 +136,9 @@ app.delete("/bbs/:id", (req,res) => {
 
 //これより下は期末レポート関係
 
+let ji = [];
+let total_memo = 0;
+
 app.post('/buy', (req,res) => {
   const want = req.body.want;
   let nun = 1;
@@ -157,28 +160,77 @@ app.post('/buy', (req,res) => {
   }else if(luck[0] == luck[2]){
     nun = Math.floor(Math.random() * 500 + 501);
   }
-  console.log([want,luck,nun]);
-  res.json({want,luck,nun});
+  ji.push(want);
+  let kanri = ji.length;
+  console.log([want,luck,nun,kanri]);
+  res.json({want,luck,nun,kanri});
 });
 
 app.post('/nedan', (req,res) => {
-  let nun = req.body.totalcon; //総合計数
-  let nedan = req.body.nedancon;
-  let nedancon = 0;
-  console.log(nun,nedan,nedancon);
-  for(let i = 0; i < nun; i++){
+  let total = req.body.total_count; //総合計数
+  let nedan_total = req.body.nedan_count; //総額
+  let nedan_puls = 0; //総額加算用変数
+  let total_puls = 0; //追加分カウント用
+  let count_a = 0;
+  let count_b = 0;
+  let count_c = 0;
+  let kanri = ji.length;
+  let keisan_ok = 0;
+
+  total_puls = total - total_memo;
+
+  console.log([
+    "総合計:"+total,
+    "総額:"+nedan_total,
+    "加算金額"+nedan_puls,
+    "増加数:"+total_puls,
+    "前回の合計:"+total_memo,
+    "管理番号"+kanri,
+    "計算済み管理番号"+keisan_ok
+  ]);
+
+  if(kanri != keisan_ok){
+  for(let i = keisan_ok; i < total_puls; i++){
     const number = Math.floor(Math.random()*10);
     if(number == 0){
-      nedancon += 500; 
+      nedan_puls += 500; 
+      count_a += 1;
     }else if(number < 3){
-      nedancon += 300;
+      nedan_puls += 300;
+      count_b += 1;
     }else{
-      nedancon += 100;
+      nedan_puls += 100;
+      count_c += 1;
+      }
+      keisan_ok += 1;
     }
   }
-  nedan = nedancon;
-  console.log([nun,nedan,nedancon]);
-  res.json({nedan});
+  ji = [];
+  total_memo = total;
+  nedan_total = nedan_puls;
+
+  console.log([
+    "計算後結果",
+    "総合計:"+total,
+    "総額:"+nedan_total,
+    "加算金額"+nedan_puls,
+    "管理番号"+kanri,
+    "計算済み管理番号"+keisan_ok,
+    "増加数:"+total_puls,
+    "前回の合計:"+total_memo,
+    "500:"+count_a,
+    "300:"+count_b,
+    "100:"+count_c
+  ]);
+
+  res.json({nedan_total,count_a,count_b,count_c});
+});
+
+app.post("/reset", (req,res) => {
+  ji = [];
+  total_memo = 0;
+  console.log(ji,total_memo);
+  res.json( {test: "GET /BBS" });
 });
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
