@@ -230,7 +230,7 @@ app.post("/reset", (req,res) => {
   ji = [];
   total_memo = 0;
   console.log(ji,total_memo);
-  res.json( {test: "GET /BBS" });
+  res.json({ji,total_memo});
 });
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));

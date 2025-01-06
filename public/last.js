@@ -3,6 +3,9 @@
 //期末レポ関係
 let total_count = 0;
 let nedan_count = 0;
+let countA = 0;
+let countB = 0;
+let countC = 0;
 let number_kanri = 0;
 const ji = document.querySelector('#ji');
 const result = document.querySelector('#result');
@@ -34,7 +37,7 @@ document.querySelector('#buy').addEventListener('click', () => {
         if(response.want == ""){
             response.want = "無";
         }
-        result.innerHTML = `<p>ルーレットの結果は${response.luck}，${response.want}が${response.nun}本</p>`;
+        result.innerHTML = `<p>ルーレットの結果は${response.luck}，${response.want}を${response.nun}本獲得しました！</p>`;
         total.innerHTML = `<p>総合計本数：${total_count}本`;
         number_kanri += response.kanri;
 
@@ -61,7 +64,14 @@ document.querySelector('#nedan').addEventListener('click', () => {
     .then( (response) => {
         console.log( response );
         nedan_count += response.nedan_total;
-        nedan.innerHTML = ` 総額：${nedan_count}円 `
+        countA += response.count_a;
+        countB += response.count_b;
+        countC += response.count_c;
+        nedan.innerHTML = `500円の本数は<span class="big">${countA}本</span>,
+                            300円の本数は<span class="big">${countB}本</span>,
+                            100円の本数は<span class="big">${countC}本</span>でした．
+                            <br>
+                            総額：${nedan_count}円 `
     });
 });
 
@@ -84,8 +94,14 @@ document.querySelector('#reset').addEventListener('click', () => {
     .then( (response) => {
         console.log( response );
         document.querySelector('#want').value = "";
-        document.querySelector('#result').value = "";
-        document.querySelector('#total').value = "";
-        document.querySelector('#nedan').value = "";
+        nedan.innerHTML = ` 総額：0円 `;
+        result.innerHTML = ``;
+        total.innerHTML = `<p>総合計本数：0本`;
+        total_count = 0;
+        nedan_count = 0;
+        countA = 0;
+        countB = 0;
+        countC = 0;
+
     });
 });
