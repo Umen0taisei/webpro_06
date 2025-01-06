@@ -162,7 +162,12 @@ app.post('/buy', (req,res) => {
   }
   ji.push(want);
   let kanri = ji.length;
-  console.log([want,luck,nun,kanri]);
+  console.log([
+    "買いたいもの:"+want,
+    "ルーレットの結果:"+luck,
+    "獲得本数"+nun,
+    "管理番号"+kanri
+  ]);
   res.json({want,luck,nun,kanri});
 });
 

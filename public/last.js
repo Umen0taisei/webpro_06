@@ -11,6 +11,7 @@ const ji = document.querySelector('#ji');
 const result = document.querySelector('#result');
 const total = document.querySelector('#total');
 const nedan = document.querySelector('#nedan_total');
+const luck = document.querySelector('#luck');
 
 document.querySelector('#buy').addEventListener('click', () => {
     const want = document.querySelector('#want').value;
@@ -37,8 +38,9 @@ document.querySelector('#buy').addEventListener('click', () => {
         if(response.want == ""){
             response.want = "無";
         }
+        luck.innerHTML = `<p>${response.luck}</p>`;
         result.innerHTML = `<p>ルーレットの結果は${response.luck}，${response.want}を${response.nun}本獲得しました！</p>`;
-        total.innerHTML = `<p>総合計本数：${total_count}本`;
+        total.innerHTML = `<p>総合計本数：<span class="big">${total_count}本</span>`;
         number_kanri = response.kanri;
         document.querySelector('#want').value = "";
     });
@@ -71,7 +73,7 @@ document.querySelector('#nedan').addEventListener('click', () => {
                             300円の本数は<span class="big">${countB}本</span>,
                             100円の本数は<span class="big">${countC}本</span>でした．
                             <br>
-                            総額：${nedan_count}円 `
+                            総額：<span class="big">${nedan_count}円</span> `
     });
 });
 
@@ -97,7 +99,8 @@ document.querySelector('#reset').addEventListener('click', () => {
         document.querySelector('#want').value = "";
         nedan.innerHTML = ` 総額：0円 `;
         result.innerHTML = ``;
-        total.innerHTML = `<p>総合計本数：0本`;
+        luck.innerHTML = `<p>ルーレット</p>`;
+        total.innerHTML = `<p>総合計本数：0本</p>`;
         total_count = 0;
         nedan_count = 0;
         countA = 0;
