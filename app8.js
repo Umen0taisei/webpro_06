@@ -229,8 +229,9 @@ app.post('/nedan', (req,res) => {
 app.post("/reset", (req,res) => {
   ji = [];
   total_memo = 0;
-  console.log(ji,total_memo);
-  res.json({ji,total_memo});
+  let kanri = ji.length
+  console.log(ji,total_memo,kanri);
+  res.json(kanri);
 });
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));

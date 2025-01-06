@@ -1,19 +1,6 @@
 .big{
     color: rgb(255, 71, 71);
-}
-
-.cover {
-    border-bottom: 1px solid hsl(0, 0%, 75%);
-    margin: 3px;
-}
-
-.name {
-    font-weight: bold;
-    width: 8em;
-}
-
-.mes {
-    margin-left: 30px;
+    font-size: 20px;
 }
 
 #buy {
@@ -26,10 +13,9 @@
 }
 
 #want {
-    /* color: aqua; */
-    margin-block-start: 50px;
-    /* margin-left: 50px; */
-
+    font-size: 25;
+    color: rgb(249, 255, 68);
+    background-color: rgb(75, 80, 97);
 }
 
 #ji {
@@ -38,10 +24,15 @@
     margin-left: 10px;
     margin-right: 10px;
     text-align: center;
-    background-color: aqua;
+    background-color: rgb(206, 119, 205);
     border-collapse:collapse;
-    width: 10cm;
+    width: 8cm;
 
+}
+
+#wantbuy {
+    color: aquamarine;
+    font-size: 25px;
 }
 
 

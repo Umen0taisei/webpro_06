@@ -39,8 +39,7 @@ document.querySelector('#buy').addEventListener('click', () => {
         }
         result.innerHTML = `<p>ルーレットの結果は${response.luck}，${response.want}を${response.nun}本獲得しました！</p>`;
         total.innerHTML = `<p>総合計本数：${total_count}本`;
-        number_kanri += response.kanri;
-
+        number_kanri = response.kanri;
         document.querySelector('#want').value = "";
     });
 });
@@ -67,6 +66,7 @@ document.querySelector('#nedan').addEventListener('click', () => {
         countA += response.count_a;
         countB += response.count_b;
         countC += response.count_c;
+        number_kanri = 0;
         nedan.innerHTML = `500円の本数は<span class="big">${countA}本</span>,
                             300円の本数は<span class="big">${countB}本</span>,
                             100円の本数は<span class="big">${countC}本</span>でした．
@@ -93,6 +93,7 @@ document.querySelector('#reset').addEventListener('click', () => {
     })
     .then( (response) => {
         console.log( response );
+        number_kanri = response;
         document.querySelector('#want').value = "";
         nedan.innerHTML = ` 総額：0円 `;
         result.innerHTML = ``;
