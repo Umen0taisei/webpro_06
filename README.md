@@ -172,4 +172,47 @@ now -->end1
 ```
 使用する場合は```index.html```から「四字熟語ガチャ」を選択するか，```localhost:8080/public/gatya.html)```に直接アクセスする.
 
+```mermaid
+flowchart TD;
+start["開始"]
+end1["終了"]
+haji[" 
+let nun = 1;
+  let luck =[]"]
+name["want = 任意の飲料の名前"]
+for[/"let i = 0;i < 3;i++"\]
+for2["const num = Math.floor
+(Math.random() * 10)
+luck.push(num)"]
+for3[\"ループ終了"/]
+lu{"ルーレットの開始"}
+re1["1倍"]
+re2["nun = Math.floor(Math.random() * 500 + 501)"]
+re3["nun =
+Math.floor(Math.random() * 50000 + 50001)"]
+kanri["ji.push(want);
+  let kanri = ji.length;"]
+re["res.json({want,luck,nun,kanri})"]
+now["total_count += response.nun;
+number_kanri = response.kanri;"]
 
+start -->haji
+haji -->name
+name -->for
+for -->for2
+for2 -->for3
+for3 -->lu
+lu -->re1
+lu -->|"luck[0] == luck[1]
+luck[1] == luck[2]
+luck[0] == luck[2]"|re2
+lu -->|"luck[0] == luck[1] 
+&& 
+luck[1] == luck[2]"|re3
+re1 -->kanri
+re2 -->kanri
+re3 -->kanri
+kanri -->re
+re -->now
+now -->end1
+```
