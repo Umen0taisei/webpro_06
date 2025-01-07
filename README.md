@@ -5,12 +5,16 @@
 ファイル名 | 説明
 -|-
 app5.js | プログラム本体
+app8.js | 期末レポートの課題制作物を含むサーバプログラム
 public/index.html | 目次画面
 public/Apple_logo_black.svg | Appleのロゴ
 public/janken.html | じゃんけんの開始画面
 public/jihanki.html | 自販機の開始画面
 public/gatya.html | ガチャの開始画面
 public/style.css | index.htmlで利用したcssファイル
+public/last.html | SPA成果物の開始画面
+public/last.js | SPA成果物のクライアント側プログラム
+public/last.css | last.htmlで利用したcssファイル
 views/show.ejs | 挨拶テンプレート
 views/luck.ejs | おみくじテンプレート
 views/icon.ejs | アイコンテンプレート
